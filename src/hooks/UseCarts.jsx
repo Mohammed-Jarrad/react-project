@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'
 
 
 function UseCarts() {
-      const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const token = localStorage.getItem("userToken");
 
 
-     const getProducts = async () => {
-       setIsLoading(true);
+  const getProducts = async () => {
+    setIsLoading(true);
              {console.log('os')}
 
     try {
@@ -30,12 +30,14 @@ function UseCarts() {
     } finally {
       setIsLoading(false);
     }
-    };
-    
-      useEffect(() => {
-        getProducts();
-      }, [products.length]);
-  
+  };
+
+  useEffect(() => {
+    if (token) {
+      getProducts();
+    }
+  }, []);
+
   return {products , isLoading , errors , token , getProducts}
 
 }
